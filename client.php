@@ -1,6 +1,5 @@
 <?php
 require 'lib/nusoap.php';
-
 $client = new nusoap_client("http://localhost/ws/server/service.php?wsdl"); // Create a instance for nusoap client
 
 ?>
@@ -28,6 +27,16 @@ $client = new nusoap_client("http://localhost/ws/server/service.php?wsdl"); // C
   <p>&nbsp;</p>
   <h3>
   <?php
+  if (isset($_GET['delete'])) {
+    $deleteId = $_GET['delete'];
+    $response = $client->call('deleteByID', array("id" => $deleteId));
+   if(isset($response["error"])) {
+    echo "<h1> " .$response. "</h1>";
+   
+  }
+  echo "Data berhasil dihapus";
+  }
+
 	if(isset($_POST['submit']))
 	{
 		$id = $_POST['id'];
@@ -43,6 +52,7 @@ echo '<th>Nama</th> ' ;
 echo '<th>Satuan</th> ' ;
 echo '<th>Harga</th> ' ;
 echo '<th>Stok</th> ' ;
+echo '<th>Aksi</th> ' ;
 echo '</tr> ' ;
 foreach ($result as $item) {
 echo '<tr>';
@@ -52,7 +62,9 @@ echo '<tr>';
     echo '<td>' . $item['satuanBarang'] . '</td>';
     echo '<td>' . $item['stokBarang'] . '</td>';
     echo '<td>' . $item['hargaBarang'] . '</td>';
-echo '</tr>';
+    echo '<td><a href="?delete=' . $item['idBarang'] . '">Delete</a></td>';
+          
+    echo '</tr>';
 
 }
 echo '</table>';

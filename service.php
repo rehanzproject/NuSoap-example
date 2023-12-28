@@ -11,6 +11,12 @@ $server->register(
 	array("id"=>"xsd:integer"),  // inputs
 	array("return"=>"xsd:string")   // outputs
 );
+
+$server->register(
+	"deleteByID", // name of function
+	array("id"=>"xsd:integer"),  // inputs
+	array("return"=>"xsd:string")   // outputs
+);
 $server->register(
 	"createData", // name of function
 	array("param"=>"xsd:string"),  // inputs

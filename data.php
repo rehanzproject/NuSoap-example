@@ -36,6 +36,20 @@ function getUserByID($id)
 	}
 }
 
+function deleteByID($id)
+{
+	$con = mysqli_connect("localhost","root","", "ukm");
+	if(mysqli_connect_errno()){
+		echo "Failed to Connect :".mysqli_connect_error();
+		die();
+	}
+	$result = mysqli_query($con, "DELETE FROM barang WHERE idBarang = " . $id . "");	
+	if($result == null ){
+		return "no data";
+	}
+	return $result;
+}
+
 function createData($param)
 {
     $con = mysqli_connect("localhost", "root", "", "ukm");
