@@ -18,6 +18,26 @@ function get_price($name)
 }
 function getUserByID($id)
 {
+    $con = mysqli_connect("localhost", "root", "", "ukm");
+    if (mysqli_connect_errno()) {
+        return "Failed to connect: " . mysqli_connect_error();
+    }
+    $result = mysqli_query($con, "SELECT * FROM barang WHERE idBarang = 2");
+    if (!$result) {
+        return "Query failed: " . mysqli_error($con);
+    }
+    if (mysqli_num_rows($result) >= 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $response[] = $row;
+        }
+		return json_encode($response);
+    } else {
+        return "No data";
+    }
+}
+
+function getAllUser($id)
+{
 	$con = mysqli_connect("localhost","root","", "ukm");
 	if(mysqli_connect_errno()){
 		echo "Failed to Connect :".mysqli_connect_error();
@@ -60,12 +80,10 @@ function createData($param)
     $result = mysqli_query($con, "INSERT INTO barang 
         (idBarang, kodeBarang, namaBarang, satuanBarang, hargaBarang, stokBarang)
         VALUES ($param[idBarang], '$param[kodeBarang]', '$param[namaBarang]', '$param[satuanBarang]', $param[hargaBarang], $param[stokBarang])");
-
-    if ($result) {
-        echo "Data inserted successfully";
-       return json_encode($result);
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
+	
+	if($result == null ){
+	return "no data";
+	}
+	return $result;
 
 }

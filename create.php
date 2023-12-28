@@ -17,13 +17,8 @@ if (isset($_POST['simpan'])) {
         "stokBarang" => $_POST['stok']
     );
     $result = $client->call("createData", array($param));
-    if ($result) {
-        echo 'Berhasil menyimpan data';
-        // Redirect to client.php after successful data insertion
-        header('Location: client.php');
-        exit(); // Ensure that no more output is sent after the header
-    } else {
-        echo 'Gagal menyimpan data';
+    if($result == null){
+        echo "Gagal menambahkan data";
     }
 }
 

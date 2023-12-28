@@ -5,22 +5,34 @@ require 'data.php';
 $server = new nusoap_server(); // Create a instance for nusoap server
 
 $server->configureWSDL("Soap Demo","urn:soapdemo"); // Configure WSDL file
-
 $server->register(
-	"getUserByID", // name of function
-	array("id"=>"xsd:integer"),  // inputs
-	array("return"=>"xsd:string")   // outputs
+	"getAllUser", 
+	array("id"=>"xsd:integer"),  
+	array("return"=>"xsd:string")
 );
 
 $server->register(
-	"deleteByID", // name of function
-	array("id"=>"xsd:integer"),  // inputs
-	array("return"=>"xsd:string")   // outputs
+	"getUserByID", 
+	array("id"=>"xsd:integer"),  
+	array("return"=>"xsd:string")
 );
+
 $server->register(
-	"createData", // name of function
-	array("param"=>"xsd:string"),  // inputs
-	array("return"=>"xsd:string")   // outputs
+	"updateByID", 
+	array("id"=>"xsd:integer"),  
+	array("return"=>"xsd:string")
+);
+
+$server->register(
+	"deleteByID", 
+	array("id"=>"xsd:integer"),  
+	array("return"=>"xsd:string")
+);
+
+$server->register(
+	"createData", 
+	array("param"=>"xsd:Array"),  
+	array("return"=>"xsd:string")
 );
 
 $server->service(file_get_contents("php://input"));
