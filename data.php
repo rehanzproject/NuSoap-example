@@ -22,7 +22,7 @@ function getUserByID($id)
     if (mysqli_connect_errno()) {
         return "Failed to connect: " . mysqli_connect_error();
     }
-    $result = mysqli_query($con, "SELECT * FROM barang WHERE idBarang = 2");
+    $result = mysqli_query($con, 'SELECT * FROM barang WHERE idBarang = ' .$id . '');
     if (!$result) {
         return "Query failed: " . mysqli_error($con);
     }
@@ -87,3 +87,28 @@ function createData($param)
 	return $result;
 
 }
+
+function updateByID($param)
+{
+    $con = mysqli_connect("localhost", "root", "", "ukm");
+    if (mysqli_connect_errno()) {
+        echo "Failed to Connect: " . mysqli_connect_error();
+        die();
+    }
+
+    $updateQuery = "UPDATE barang SET
+        kodeBarang = '{$param['kodeBarang']}',
+        namaBarang = '{$param['namaBarang']}',
+        satuanBarang = '{$param['satuanBarang']}',
+        hargaBarang = {$param['hargaBarang']},
+        stokBarang = {$param['stokBarang']}
+        WHERE idBarang = {$param['idBarang']}";
+
+    $result = mysqli_query($con, $updateQuery);
+
+    if ($result == null) {
+        return "no data";
+    }
+    return $result;
+}
+

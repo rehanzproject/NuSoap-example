@@ -43,7 +43,7 @@ echo '<th>Nama</th> ' ;
 echo '<th>Satuan</th> ' ;
 echo '<th>Harga</th> ' ;
 echo '<th>Stok</th> ' ;
-echo '<th colspan=2>Aksi</th> ' ;
+echo '<th colspan=3>Aksi</th> ' ;
 echo '</tr> ' ;
 foreach ($result as $item) {
 echo '<tr>';
@@ -53,11 +53,10 @@ echo '<tr>';
     echo '<td>' . $item['satuanBarang'] . '</td>';
     echo '<td>' . $item['stokBarang'] . '</td>';
     echo '<td>' . $item['hargaBarang'] . '</td>';
-    echo '<td><a href="?delete=' . $item['idBarang'] . '">Delete</a></td>';
+    echo '<td><a href="read.php?id=' . $item['idBarang'] . '">Read</a></td>';
     echo '<td><a href="update.php?id=' . $item['idBarang'] . '">Update</a></td>';
-            
+    echo '<td><a href="?delete=' . $item['idBarang'] . '">Delete</a></td>';
     echo '</tr>';
-
 }
 echo '</table>';
         
